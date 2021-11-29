@@ -1,4 +1,4 @@
-package id.syakurr.bookspace;
+package id.kelompok1.bookspaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+
+import id.kelompok1.bookspaces.R;
 
 public class BukuIlmiahActivity extends AppCompatActivity {
     private DBHelper database;

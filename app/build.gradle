@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "id.syakurr.bookspace"
+        applicationId "id.kelompok1.bookspaces"
         minSdk 24
         targetSdk 31
         versionCode 1

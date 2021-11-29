@@ -1,4 +1,4 @@
-package id.syakurr.bookspace;
+package id.kelompok1.bookspaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import id.kelompok1.bookspaces.R;
 
 public class ProfileActivity extends AppCompatActivity {
     private String strNik,strNama, strUsername, strJenisKelamin, strEmail, strAlamat, strMinatBaca;
@@ -46,23 +48,4 @@ public class ProfileActivity extends AppCompatActivity {
         alamat.setText(strAlamat);
         minat_baca.setText(strMinatBaca);
     }
-
-    protected void onResume(){
-        Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_SHORT).show();
-        Log.i("Status", "Profile");
-        super.onResume();
-    }
-
-    protected void onStop(){
-        Toast.makeText(getApplicationContext(), "Halaman berpindah", Toast.LENGTH_SHORT).show();
-        Log.i("State", "Halaman berpindah");
-        super.onStop();
-    }
-
-    protected void onDestroy(){
-        Toast.makeText(getApplicationContext(), "Aplikasi ditutup", Toast.LENGTH_SHORT).show();
-        Log.i("State", "Aplikasi ditutup");
-        super.onDestroy();
-    }
-
 }

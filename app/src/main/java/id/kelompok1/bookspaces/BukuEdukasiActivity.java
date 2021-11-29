@@ -1,4 +1,4 @@
-package id.syakurr.bookspace;
+package id.kelompok1.bookspaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,22 +9,24 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class BukuFiksiActivity extends AppCompatActivity {
+import id.kelompok1.bookspaces.R;
+
+public class BukuEdukasiActivity extends AppCompatActivity {
     private DBHelper database;
     protected RecyclerView recyclerView;
-    protected RecyclerView.Adapter bukuFiksiAdapter;
+    protected RecyclerView.Adapter bukuEdukasiAdapter;
     private ArrayList<BukuHandler> bukuHandler = new ArrayList<BukuHandler>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buku_fiksi);
+        setContentView(R.layout.activity_buku_edukasi);
 
         database = new DBHelper(this);
-        recyclerView = (RecyclerView)findViewById(R.id.list_fiksi);
+        recyclerView = (RecyclerView)findViewById(R.id.list_edukasi);
 
         final DBHelper dh = new DBHelper(getApplicationContext());
-        Cursor cursor = dh.tampilkanBukuFiksi();
+        Cursor cursor = dh.tampilkanBukuEdukasi();
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             while (!cursor.isAfterLast()) {
@@ -40,7 +42,7 @@ public class BukuFiksiActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        bukuFiksiAdapter = new BukuFiksiAdapter(bukuHandler, BukuFiksiActivity.this, recyclerView);
-        recyclerView.setAdapter(bukuFiksiAdapter);
+        bukuEdukasiAdapter = new BukuFiksiAdapter(bukuHandler, BukuEdukasiActivity.this, recyclerView);
+        recyclerView.setAdapter(bukuEdukasiAdapter);
     }
 }

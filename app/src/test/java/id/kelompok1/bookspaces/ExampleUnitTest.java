@@ -1,4 +1,4 @@
-package id.syakurr.bookspace;
+package id.kelompok1.bookspaces;
 
 import org.junit.Test;
 

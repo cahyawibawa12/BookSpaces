@@ -1,15 +1,16 @@
-package id.syakurr.bookspace;
+package id.kelompok1.bookspaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import id.kelompok1.bookspaces.R;
 
 public class LobbyActivity extends AppCompatActivity {
     private TextView label_name, label_alamat;
@@ -105,29 +106,5 @@ public class LobbyActivity extends AppCompatActivity {
                 startActivity(goAddKategori);
             }
         });
-    }
-
-    protected void onResume(){
-        Toast.makeText(getApplicationContext(), "Selamat datang di BookSpace", Toast.LENGTH_SHORT).show();
-        Log.i("Status", "Selamat datang di BookSpace");
-        super.onResume();
-    }
-
-    protected void onPause(){
-        Toast.makeText(getApplicationContext(), "Halaman berpindah", Toast.LENGTH_SHORT).show();
-        Log.i("State", "Halaman berpindah");
-        super.onPause();
-    }
-
-    protected void onStop(){
-        Toast.makeText(getApplicationContext(), "Halaman berpindah", Toast.LENGTH_SHORT).show();
-        Log.i("State", "Halaman berpindah");
-        super.onStop();
-    }
-
-    protected void onDestroy(){
-        Toast.makeText(getApplicationContext(), "Aplikasi ditutup", Toast.LENGTH_SHORT).show();
-        Log.i("State", "Aplikasi ditutup");
-        super.onDestroy();
     }
 }

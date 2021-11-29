@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.syakurr.bookspace">
+    package="id.kelompok1.bookspaces">
 
     <application
         android:allowBackup="true"
@@ -10,40 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookSpace">
         <activity
-            android:name=".DetailPinjamActivity"
+            android:name="id.kelompok1.bookspaces.DetailPinjamActivity"
             android:exported="false" />
         <activity
-            android:name=".BukuFiksiActivity"
+            android:name="id.kelompok1.bookspaces.BukuFiksiActivity"
             android:exported="false" />
         <activity
-            android:name=".BukuIlmiahActivity"
+            android:name="id.kelompok1.bookspaces.BukuIlmiahActivity"
             android:exported="false" />
         <activity
-            android:name=".BukuEdukasiActivity"
+            android:name="id.kelompok1.bookspaces.BukuEdukasiActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name="id.kelompok1.bookspaces.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".TambahBukuActivity"
+            android:name="id.kelompok1.bookspaces.TambahBukuActivity"
             android:exported="false" />
         <activity
-            android:name=".ListPinjamActivity"
+            android:name="id.kelompok1.bookspaces.ListPinjamActivity"
             android:exported="false" />
         <activity
-            android:name=".PinjamActivity"
+            android:name="id.kelompok1.bookspaces.PinjamActivity"
             android:exported="false" />
         <activity
-            android:name=".LobbyActivity"
+            android:name="id.kelompok1.bookspaces.LobbyActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="id.kelompok1.bookspaces.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".DaftarActivity"
+            android:name="id.kelompok1.bookspaces.DaftarActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="id.kelompok1.bookspaces.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
