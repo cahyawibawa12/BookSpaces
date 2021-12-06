@@ -1,6 +1,7 @@
 package id.kelompok1.bookspaces;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,15 @@ public class BukuIlmiahAdapter extends RecyclerView.Adapter<BukuIlmiahAdapter.Vi
         BukuHandler bukuHandler = bukuHandlerList.get(position);
         holder.itemJudul.setText(String.valueOf(bukuHandler.getJudul()));
         holder.itemKategori.setText(String.valueOf(bukuHandler.getKategori()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer itemId = Integer.valueOf(bukuHandler.getId());
+                Intent gotoDetail = new Intent(holder.itemView.getContext(), DetailBukuActivity.class);
+                gotoDetail.putExtra("id", itemId);
+                holder.itemView.getContext().startActivity(gotoDetail);
+            }
+        });
     }
 
     @Override

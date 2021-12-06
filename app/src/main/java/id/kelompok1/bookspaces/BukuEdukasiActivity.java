@@ -31,6 +31,7 @@ public class BukuEdukasiActivity extends AppCompatActivity {
         if (cursor.getCount() > 0) {
             while (!cursor.isAfterLast()) {
                 BukuHandler bukuHandlerList = new BukuHandler();
+                bukuHandlerList.setId((cursor.getInt(cursor.getColumnIndexOrThrow("id"))));
                 bukuHandlerList.setJudul((cursor.getString(cursor.getColumnIndexOrThrow("judul"))));
                 bukuHandlerList.setKategori((cursor.getString(cursor.getColumnIndexOrThrow("kategori"))));
                 bukuHandler.add(bukuHandlerList);

@@ -10,40 +10,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookSpace">
         <activity
-            android:name="id.kelompok1.bookspaces.DetailPinjamActivity"
+            android:name=".DetailBukuActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.BukuFiksiActivity"
+            android:name=".DetailPinjamActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.BukuIlmiahActivity"
+            android:name=".BukuFiksiActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.BukuEdukasiActivity"
+            android:name=".BukuIlmiahActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.ProfileActivity"
+            android:name=".BukuEdukasiActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.TambahBukuActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.ListPinjamActivity"
+            android:name=".TambahBukuActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.PinjamActivity"
+            android:name=".ListPinjamActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.LobbyActivity"
+            android:name=".PinjamActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.LoginActivity"
+            android:name=".LobbyActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.DaftarActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name="id.kelompok1.bookspaces.MainActivity"
+            android:name=".DaftarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
