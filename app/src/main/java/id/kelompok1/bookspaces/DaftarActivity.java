@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -82,13 +83,16 @@ public class DaftarActivity extends AppCompatActivity {
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                DBHelper dbHelper = new DBHelper(getApplicationContext());
+
                 String getEmail = email.getText().toString();
                 String checkEmail = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
                 int selected_jk = jenis_kelamin.getCheckedRadioButtonId();
                 jk = (RadioButton) findViewById(selected_jk);
 
                 if (nik.length() == 0 && nama.length() == 0 && alamat.length() == 0 && jenis_kelamin.getCheckedRadioButtonId() == -1
-                        && username.length() == 0 && email.length() == 0 && password.length() == 0) {
+                  && username.length() == 0 && email.length() == 0 && password.length() == 0) {
                     Toast.makeText(DaftarActivity.this, "Lengkapi form pendaftaran!", Toast.LENGTH_SHORT).show();
                 } else if (nik.length() < 16 || nik.length() > 16) {
                     Toast.makeText(DaftarActivity.this, "NIK harus 16 digit!", Toast.LENGTH_SHORT).show();
@@ -98,12 +102,16 @@ public class DaftarActivity extends AppCompatActivity {
                     Toast.makeText(DaftarActivity.this, "Alamat tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 } else if (jenis_kelamin.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(DaftarActivity.this, "Jenis kelamin tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (username.length() == 0) {
-                    Toast.makeText(DaftarActivity.this, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (email.length() == 0) {
+                }else if (email.length() == 0) {
                     Toast.makeText(DaftarActivity.this, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 } else if (!getEmail.matches(checkEmail)) {
                     Toast.makeText(DaftarActivity.this, "Email tidak valid!", Toast.LENGTH_SHORT).show();
+                } else if(dbHelper.cekEmail(email.getText().toString())){
+                    Toast.makeText(DaftarActivity.this, "Email telah digunakan!", Toast.LENGTH_SHORT).show();
+                }else if (username.length() == 0) {
+                    Toast.makeText(DaftarActivity.this, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                }else if (dbHelper.cekUsername(username.getText().toString())){
+                    Toast.makeText(DaftarActivity.this, "Username telah digunakan!", Toast.LENGTH_SHORT).show();
                 } else if (password.length() == 0) {
                     Toast.makeText(DaftarActivity.this, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 } else if (password.length() < 8) {
@@ -132,15 +140,19 @@ public class DaftarActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(DaftarActivity.this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+                        PenggunaHandler penggunaHandler = importToModel();
+                        simpanPenggunaKeDB(penggunaHandler);
+                        String id = getLastID();
                         Intent gotoLoby = new Intent(DaftarActivity.this, LobbyActivity.class);
-                        gotoLoby.putExtra("nik", nik.getText().toString());
-                        gotoLoby.putExtra("nama", nama.getText().toString() );
-                        gotoLoby.putExtra("alamat", alamat.getText().toString());
-                        gotoLoby.putExtra("jeniskelamin", jk.getText().toString());
-                        gotoLoby.putExtra("email", email.getText().toString());
-                        gotoLoby.putExtra("username", username.getText().toString());
-                        gotoLoby.putExtra("minatbaca", strSeekbar.toString());
+                        gotoLoby.putExtra("id", id);
+//                        gotoLoby.putExtra("nama", nama.getText().toString() );
+//                        gotoLoby.putExtra("alamat", alamat.getText().toString());
+//                        gotoLoby.putExtra("jeniskelamin", jk.getText().toString());
+//                        gotoLoby.putExtra("email", email.getText().toString());
+//                        gotoLoby.putExtra("username", username.getText().toString());
+//                        gotoLoby.putExtra("minatbaca", strSeekbar.toString());
                         startActivity(gotoLoby);
+                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -151,5 +163,34 @@ public class DaftarActivity extends AppCompatActivity {
         AlertDialog dialog = dialogAlertBuilder.create();
 
         dialog.show();
+    }
+
+    private PenggunaHandler importToModel(){
+        PenggunaHandler penggunaHandler = new PenggunaHandler();
+        penggunaHandler.setNik(nik.getText().toString());
+        penggunaHandler.setNama_lengkap(nama.getText().toString());
+        penggunaHandler.setAlamat(alamat.getText().toString());
+        penggunaHandler.setJenis_kelamin(jk.getText().toString());
+        penggunaHandler.setEmail(email.getText().toString());
+        penggunaHandler.setPassword(password.getText().toString());
+        penggunaHandler.setUsername(username.getText().toString());
+        penggunaHandler.setMinat_membaca(strSeekbar.toString());
+        return penggunaHandler;
+    }
+
+    private void simpanPenggunaKeDB(PenggunaHandler penggunaHandler){
+        DBHelper db = new DBHelper(getApplicationContext());
+        db.tambahPengguna(penggunaHandler);
+    }
+
+    private String getLastID(){
+        String id = new String();
+        DBHelper db = new DBHelper(this);
+        Cursor cursor = db.tampilkanLastID();
+
+        while (cursor.moveToNext()) {
+            id = cursor.getString(0);
+        }
+        return id;
     }
 }

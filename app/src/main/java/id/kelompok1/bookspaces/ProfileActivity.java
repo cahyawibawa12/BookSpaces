@@ -3,6 +3,7 @@ package id.kelompok1.bookspaces;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 import id.kelompok1.bookspaces.R;
 
 public class ProfileActivity extends AppCompatActivity {
-    private String strNik,strNama, strUsername, strJenisKelamin, strEmail, strAlamat, strMinatBaca;
+    private String strNik,strNama, strUsername, strJenisKelamin, strEmail, strAlamat, strMinatBaca, strId;
     private TextView nik, nama, username, jenis_kelamin, email, alamat, minat_baca;
     private ImageView profile;
 
@@ -32,13 +33,21 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         Intent getData = getIntent();
-        strNik = getData.getStringExtra("nik");
-        strNama = getData.getStringExtra("nama");
-        strUsername = getData.getStringExtra("username");
-        strJenisKelamin = getData.getStringExtra("jeniskelamin");
-        strEmail = getData.getStringExtra("email");
-        strAlamat = getData.getStringExtra("alamat");
-        strMinatBaca = getData.getStringExtra("minatbaca");
+        strId = getData.getStringExtra("id");
+
+        DBHelper dbHelper = new DBHelper(this);
+
+        Cursor cursor = dbHelper.tampilkanPenggunaDariID(strId);
+
+        while (cursor.moveToNext()) {
+            strNik = cursor.getString(1);
+            strNama = cursor.getString(2);
+            strUsername = cursor.getString(6);
+            strJenisKelamin = cursor.getString(4);
+            strEmail = cursor.getString(5);
+            strAlamat = cursor.getString(3);
+            strMinatBaca = cursor.getString(8);
+        }
 
         nik.setText(strNik);
         nama.setText(strNama);
