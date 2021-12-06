@@ -3,6 +3,7 @@ package id.kelompok1.bookspaces;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ import id.kelompok1.bookspaces.R;
 
 public class LobbyActivity extends AppCompatActivity {
     private TextView label_name, label_alamat;
-    private String nik, nama, username, jenis_kelamin, email, alamat, minat_baca;
+    private String nik, nama, username, jenis_kelamin, email, alamat, minat_baca, id;
     private ImageView profile, edukasi, ilmiah, fiksi, data_pinjam, lihat_pinjam, add_category;
 
     @Override
@@ -33,13 +34,23 @@ public class LobbyActivity extends AppCompatActivity {
         add_category = (ImageView)findViewById(R.id.btn_tambah);
 
         Intent getData = getIntent();
-        nik = getData.getStringExtra("nik");
-        nama = getData.getStringExtra("nama");
-        username = getData.getStringExtra("username");
-        jenis_kelamin = getData.getStringExtra("jeniskelamin");
-        email = getData.getStringExtra("email");
-        alamat = getData.getStringExtra("alamat");
-        minat_baca = getData.getStringExtra("minatbaca");
+        id = getData.getStringExtra("id");
+
+        DBHelper dbHelper = new DBHelper(this);
+
+        Cursor cursor = dbHelper.tampilkanPenggunaDariID(id);
+
+        while (cursor.moveToNext()) {
+            nama = cursor.getString(2);
+            alamat = cursor.getString(3);
+        }
+
+//        nama = getData.getStringExtra("nama");
+//        username = getData.getStringExtra("username");
+//        jenis_kelamin = getData.getStringExtra("jeniskelamin");
+//        email = getData.getStringExtra("email");
+//        alamat = getData.getStringExtra("alamat");
+//        minat_baca = getData.getStringExtra("minatbaca");
 
         label_name.setText(nama);
         label_alamat.setText(alamat);
@@ -48,13 +59,7 @@ public class LobbyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent gotoProfile = new Intent(LobbyActivity.this, ProfileActivity.class);
-                gotoProfile.putExtra("nik", nik);
-                gotoProfile.putExtra("nama", nama);
-                gotoProfile.putExtra("alamat", alamat);
-                gotoProfile.putExtra("jeniskelamin", jenis_kelamin);
-                gotoProfile.putExtra("email", email);
-                gotoProfile.putExtra("username", username);
-                gotoProfile.putExtra("minatbaca", minat_baca);
+                gotoProfile.putExtra("id", id);
                 startActivity(gotoProfile);
             }
         });
