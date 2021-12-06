@@ -64,8 +64,8 @@ public class TambahBukuActivity extends AppCompatActivity {
                         judul.getText().clear();
                         kategori.getText().clear();
 
-                        Intent goLobby = new Intent(TambahBukuActivity.this,LobbyActivity.class);
-                        startActivity(goLobby);
+//                        Intent goLobby = new Intent(TambahBukuActivity.this,LobbyActivity.class);
+//                        startActivity(goLobby);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

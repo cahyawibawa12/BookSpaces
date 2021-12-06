@@ -88,8 +88,8 @@ public class DetailBukuActivity extends AppCompatActivity {
                         judul.getText().clear();
                         kategori.getText().clear();
 
-                        Intent goListBuku = new Intent(DetailBukuActivity .this, LobbyActivity.class);
-                        startActivity(goListBuku);
+//                        Intent goListBuku = new Intent(DetailBukuActivity .this, LobbyActivity.class);
+//                        startActivity(goListBuku);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -119,8 +119,8 @@ public class DetailBukuActivity extends AppCompatActivity {
                             Toast.makeText(DetailBukuActivity.this, "Hapus buku Gagal", Toast.LENGTH_SHORT).show();
                         }
                         dbHelper.close();
-                        Intent goListBuku = new Intent(DetailBukuActivity .this, LobbyActivity.class);
-                        startActivity(goListBuku);
+//                        Intent goListBuku = new Intent(DetailBukuActivity .this, LobbyActivity.class);
+//                        startActivity(goListBuku);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
