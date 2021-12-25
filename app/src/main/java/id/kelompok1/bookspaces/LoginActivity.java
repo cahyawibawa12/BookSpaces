@@ -17,11 +17,19 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private TextView daftar;
     private String strUsername, strPassword;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(this);
+
+
+        if (!sessionManager.getSession().equals(-1)){
+            moveToLobby(sessionManager.getSession());
+        }
 
         login = (Button)findViewById(R.id.btn_login);
         username = (EditText)findViewById(R.id.username);
@@ -39,9 +47,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Lengkapi Username atau Password!", Toast.LENGTH_SHORT).show();
                 } else if (db.cekUsername(strUsername)) {
                     if (db.cekUsernameDanPassword(strUsername, strPassword)>0){
-                        Intent gotoLoby = new Intent(LoginActivity.this, LobbyActivity.class);
-                        gotoLoby.putExtra("id", String.valueOf(db.cekUsernameDanPassword(strUsername, strPassword)));
-                        startActivity(gotoLoby);
+                        sessionManager.saveSession(db.cekUsernameDanPassword(strUsername, strPassword));
+                        moveToLobby(db.cekUsernameDanPassword(strUsername, strPassword));
                     }else{
                         Toast.makeText(LoginActivity.this, "Password Salah!", Toast.LENGTH_SHORT).show();
                     }
@@ -58,5 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(gotoRegist);
             }
         });
+    }
+
+    private void moveToLobby(Integer id){
+        DBHelper db = new DBHelper(getApplicationContext());
+        Intent gotoLoby = new Intent(LoginActivity.this, LobbyActivity.class);
+        gotoLoby.putExtra("id", id.toString());
+        startActivity(gotoLoby);
+        finish();
     }
 }

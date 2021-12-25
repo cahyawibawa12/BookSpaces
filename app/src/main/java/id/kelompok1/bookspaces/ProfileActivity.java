@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,11 +18,15 @@ public class ProfileActivity extends AppCompatActivity {
     private String strNik,strNama, strUsername, strJenisKelamin, strEmail, strAlamat, strMinatBaca, strId;
     private TextView nik, nama, username, jenis_kelamin, email, alamat, minat_baca;
     private ImageView profile;
+    private Button btnLogout;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        sessionManager = new SessionManager(this);
 
         profile = (ImageView)findViewById(R.id.icon_profile);
         nik = (TextView)findViewById(R.id.profile_nik);
@@ -31,9 +37,21 @@ public class ProfileActivity extends AppCompatActivity {
         alamat = (TextView)findViewById(R.id.profile_alamat);
         minat_baca = (TextView)findViewById(R.id.profile_minatbaca);
 
-
+        btnLogout = findViewById(R.id.btnLogout);
         Intent getData = getIntent();
         strId = getData.getStringExtra("id");
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManager.removeSesion();
+                Intent moveToLogin = new Intent(ProfileActivity.this, LoginActivity.class);
+                moveToLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                  Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(moveToLogin);
+                finish();
+            }
+        });
 
         DBHelper dbHelper = new DBHelper(this);
 

@@ -17,11 +17,22 @@ public class LobbyActivity extends AppCompatActivity {
     private TextView label_name, label_alamat;
     private String nik, nama, username, jenis_kelamin, email, alamat, minat_baca, id;
     private ImageView profile, edukasi, ilmiah, fiksi, data_pinjam, lihat_pinjam, add_category;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
+
+        sessionManager = new SessionManager(this);
+
+        if (sessionManager.getSession()==-1){
+            Intent moveToLogin = new Intent(LobbyActivity.this, LoginActivity.class);
+            moveToLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK |
+              Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(moveToLogin);
+            finish();
+        }
 
         profile = (ImageView)findViewById(R.id.display_picture);
         label_name = (TextView)findViewById(R.id.display_nama);
