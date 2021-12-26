@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper (Context context) {
         super(context, "bookspace.db", null, 2);
-//        context.deleteDatabase("bookspace.db"); // hapus database
     }
 
     @Override

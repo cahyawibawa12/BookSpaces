@@ -145,12 +145,6 @@ public class DaftarActivity extends AppCompatActivity {
                         String id = getLastID();
                         Intent gotoLoby = new Intent(DaftarActivity.this, LobbyActivity.class);
                         gotoLoby.putExtra("id", id);
-//                        gotoLoby.putExtra("nama", nama.getText().toString() );
-//                        gotoLoby.putExtra("alamat", alamat.getText().toString());
-//                        gotoLoby.putExtra("jeniskelamin", jk.getText().toString());
-//                        gotoLoby.putExtra("email", email.getText().toString());
-//                        gotoLoby.putExtra("username", username.getText().toString());
-//                        gotoLoby.putExtra("minatbaca", strSeekbar.toString());
                         startActivity(gotoLoby);
                         finish();
                     }

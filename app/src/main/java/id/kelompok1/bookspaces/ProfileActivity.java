@@ -1,7 +1,9 @@
 package id.kelompok1.bookspaces;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -44,12 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sessionManager.removeSesion();
-                Intent moveToLogin = new Intent(ProfileActivity.this, LoginActivity.class);
-                moveToLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                  Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(moveToLogin);
-                finish();
+                dialogLogoutAlert();
             }
         });
 
@@ -74,5 +71,31 @@ public class ProfileActivity extends AppCompatActivity {
         email.setText(strEmail);
         alamat.setText(strAlamat);
         minat_baca.setText(strMinatBaca);
+    }
+
+    private void dialogLogoutAlert(){
+        AlertDialog.Builder dialogAlertBuilder = new AlertDialog.Builder(ProfileActivity.this);
+        dialogAlertBuilder.setTitle("Konfirmasi Logout");
+        dialogAlertBuilder
+          .setMessage("Apakah anda yakin untuk logout?")
+          .setPositiveButton("Konfirmasi", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  sessionManager.removeSesion();
+                  Intent moveToLogin = new Intent(ProfileActivity.this, LoginActivity.class);
+                  moveToLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                  startActivity(moveToLogin);
+                  finish();
+              }
+          })
+          .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  dialogInterface.cancel();
+              }
+          });
+        AlertDialog dialog = dialogAlertBuilder.create();
+
+        dialog.show();
     }
 }

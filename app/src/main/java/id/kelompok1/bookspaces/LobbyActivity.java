@@ -56,13 +56,6 @@ public class LobbyActivity extends AppCompatActivity {
             alamat = cursor.getString(3);
         }
 
-//        nama = getData.getStringExtra("nama");
-//        username = getData.getStringExtra("username");
-//        jenis_kelamin = getData.getStringExtra("jeniskelamin");
-//        email = getData.getStringExtra("email");
-//        alamat = getData.getStringExtra("alamat");
-//        minat_baca = getData.getStringExtra("minatbaca");
-
         label_name.setText(nama);
         label_alamat.setText(alamat);
 
